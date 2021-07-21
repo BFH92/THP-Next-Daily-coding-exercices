@@ -1,0 +1,81 @@
+img {
+  width: 100%;
+  height: auto;
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0 4px;
+}
+
+/* Create two equal columns that sits next to each other */
+.column {
+  flex: 50%;
+  padding: 0 4px;
+}
+
+.column img {
+  margin-top: 8px;
+  vertical-align: middle;
+}
+.jumbotron {
+  background-image: url("https://keepfresh.com.au/wp-content/uploads/2015/07/BANNER-760-fruit-veg-1.png");
+  background-size: cover;
+  height: 100%;
+  padding-top: 20%;
+  padding-bottom: 20%;
+}
+
+#Accueil {
+  display: block;
+}
+#Menu {
+  display: none;
+}
+#Photos {
+  display: none;
+}
+#popup {
+  display: none;
+}
+
+#popup {
+  display: none;
+}
+
+.popup__wrapper {
+  background: rgba(0, 0, 0, 0.75);
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  z-index: 10;
+}
+
+.popup__container {
+  background: #fff;
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 18px;
+  margin: 100px auto;
+  max-width: 100%;
+  padding: 20px;
+  width: 500px;
+}
+
+.popup__title {
+  font-size: 26px;
+  margin-bottom: 15px;
+}
+.newsletter {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+#btn {
+  position: fixed;
+  bottom: 20%;
+  left: 20%;
+}

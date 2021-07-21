@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset='utf-8'>
+	<meta http-equiv='X-UA-Compatible' content='IE=edge'>
+	<title>Page Title</title>
+	<meta name='viewport' content='width=device-width, initial-scale=1'>
+	<link rel='stylesheet' type='text/css' media='screen' href='style.css'>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+		integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+
+<body>
+	<ul class="nav">
+		<li class="nav-item">
+			<a class="nav-link active" id="Accueil-Nav">Accueil</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link" id="Menu-Nav">Menu</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link" id="Photos-Nav">Photos</a>
+		</li>
+	</ul>
+	<div id="popup" class="popup__wrapper">
+		<div class="popup__container">
+			<h1 class="popup__title">Ne partez pas tout de suite !</h1>
+			<p>Plein de menus sont possibles! 💁</p>
+		</div>
+	</div>
+
+	<div id="Accueil">
+		<div class="jumbotron">
+			<div class="container-fluid">
+				<h1>Branchouil''</h1>
+				<p>Des prodruits frais et bio</p>
+			</div>
+		</div>
+	</div>
+
+	<div id="Menu">
+		<div class="slider slider-single">
+			<div>
+				<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 ">
+					<div class="offer-item">
+						<div>
+							<h3 class="menu-title">GARLIC BREAD</h3>
+							<p class="menu-content">
+								Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc mollis eleifend dapibus.
+							</p>
+						</div>
+						<span class="offer-price">$8.5</span>
+					</div>
+				</div>
+
+				<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 ">
+					<div class="offer-item">
+						<div>
+							<h3 class="menu-title">MIXED SALAD</h3>
+							<p class="menu-content">
+								Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc mollis eleifend dapibus.
+							</p>
+						</div>
+						<span class="offer-price">$25</span>
+					</div>
+				</div>
+
+				<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 ">
+					<div class="offer-item">
+						<div>
+							<h3 class="menu-title">BBQ CHICKEN WINGS</h3>
+							<p class="menu-content">
+								Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc mollis eleifend dapibus.
+							</p>
+						</div>
+						<span class="offer-price">$10</span>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div>
+			<div>
+				<button type="button" class="btn btn-primary" id="btn">Changeons de menu ! </button>
+			</div>
+		</div>
+	</div>
+	<div id="Photos">
+
+		<div class="row">
+			<div id = "col1" class="column" ondrop="drop(event)" ondragover="allowDrop(event)" >
+				<img id="drag1" src="./photo_03.jpg"  draggable="true" ondragstart="drag(event)">
+			</div>
+			<div id = "col2" class="column" ondrop="drop(event)" ondragover="allowDrop(event)">
+				<img id="drag2"src="./photo_02.jpg"  draggable="true" ondragstart="drag(event)">
+			</div>
+			<div id = "col3" class="column" ondrop="drop(event)" ondragover="allowDrop(event)">
+				<img id="drag3" src="./photo_01.jpg" draggable="true" ondragstart="drag(event)">
+			</div>
+		</div>
+
+	</div>
+	<script type="application/javascript" src="./index.js"></script>
+
+</body>
+
+</html>
