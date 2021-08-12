@@ -1,0 +1,19 @@
+
+
+.useCaseContent{
+  display: grid;
+
+  justify-content: center;
+  align-content: center;
+  width: 200px;
+  border: 1px solid #2d2d2d;
+}
+.casesTitle{
+  display:grid;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+.useCase{
+  display:grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  align-content: center;
+}

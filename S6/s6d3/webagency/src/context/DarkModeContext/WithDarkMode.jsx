@@ -1,0 +1,10 @@
+import React from 'react'
+import DarkModeContext from './index'
+
+const withDarkMode = (Component) => (props) => (
+  <DarkModeContext.Consumer>
+    {(darkmode) => <Component {... props} darkModeData = {darkmode} />}
+  </DarkModeContext.Consumer>
+)
+
+export default withDarkMode;

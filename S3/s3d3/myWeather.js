@@ -35,7 +35,7 @@ async function showWeather(data) {
  var selector = document.getElementById('day')
   const iconUrl = `https://www.weatherbit.io/static/img/icons/${weatherIcon}.png`
   
- selector.innerHTML += `
+selector.innerHTML += `
 <div class="col">
   <div class="card col-sm" style="width: 18rem;">
     <img class="card-img-top" src="${iconUrl}" alt="Card image cap">
