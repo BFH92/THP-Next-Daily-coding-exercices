@@ -1,4 +1,4 @@
-import { FETCH_CURRENT_USER_REQUEST, FETCH_CURRENT_USER_SUCCESS, FETCH_CURRENT_USER_FAILED, REGISTER_CURRENT_EMAIL, REGISTER_CURRENT_USERNAME, REGISTER_CURRENT_PASSWORD } from '../Types/CurrentUserTypes'
+import { FETCH_CURRENT_USER_REQUEST, FETCH_CURRENT_USER_SUCCESS, FETCH_CURRENT_USER_FAILED, REGISTER_CURRENT_EMAIL, REGISTER_CURRENT_USERNAME, REGISTER_CURRENT_PASSWORD, REGISTER_CURRENT_DESCRIPTION } from '../Types/CurrentUserTypes'
 
 export const FetchCurrentUserRequest = () => {
   return{
@@ -38,6 +38,13 @@ export const RegisterCurrentPassword = (password) => {
   return{
     type: REGISTER_CURRENT_PASSWORD,
     password
+
+  }
+}
+export const RegisterCurrentDescription= (description) => {
+  return{
+    type: REGISTER_CURRENT_DESCRIPTION,
+    description
 
   }
 }

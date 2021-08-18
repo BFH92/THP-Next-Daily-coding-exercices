@@ -1,50 +1,70 @@
 import React from 'react';
 import Cookies from 'js-cookie'
 import { useSelector } from 'react-redux';
-import {FetchCurrentUserFailed, FetchCurrentUserRequest, FetchCurrentUserSuccess } from '../Redux';
+import {FetchCurrentUserFailed, FetchCurrentUserRequest, FetchCurrentUserSuccess, RegisterCurrentEmail,RegisterCurrentUserName,RegisterCurrentPassword, RegisterCurrentDescription } from '../Redux';
 import { useDispatch } from 'react-redux';
-
+import { useState } from 'react';
 
 const UserEditable = () => {
   // if userName
   const Token = Cookies.get('token')
-  const UserEmail = "User mail example"
   const dispatch = useDispatch();
+  const email = useSelector(state => state.currentuser.email)
+  const username = useSelector(state => state.currentuser.username)
+  const password = useSelector(state => state.currentuser.password)
+  const description = useSelector(state => state.currentuser.description)
 
-  const fetchUserProfile = () => { //TODO: A FAIRE EN PRIO
-    return (dispatch) => {
-      dispatch(FetchCurrentUserRequest());
+  const [UserNameInput, setUsernameInput] =  useState(username);
+  const [DescriptionInput, setDescriptionInput] =  useState(description);
+  
+  const data = {
+    username: UserNameInput,
+    description: DescriptionInput
+  } 
 
-      fetch('http://localhost:1337/users/me', {
-        method: 'get',
-        headers: {
-          'Authorization': `Bearer ${Token}`,
-          'Content-Type':'application/json'
-        }
-        //body: JSON.stringify(data)
-      })
-        .then((response) => response.json())
-        .then((response) => {
-          if (response.error) {
-            console.log(response)
-            dispatch(FetchCurrentUserFailed(response.message));
-          } else {
-            console.log(response)
-            dispatch(FetchCurrentUserSuccess(response.user));
-          }
-        })
-    }
+  const SaveUserName=(e) => {
+    setUsernameInput(e.target.value)
   }
-  //dispatch(fetchUserProfile())
+  const SaveUserDescription=(e) => {
+    setDescriptionInput(e.target.value)
+  }
+  const UpdateUserProfile = () => { 
+
+  return (dispatch) => {
+    dispatch(RegisterCurrentUserName(UserNameInput))
+    dispatch(RegisterCurrentDescription(DescriptionInput))
+    dispatch(FetchCurrentUserRequest());
+
+    fetch('http://localhost:1337/users/me', {
+      method: 'PUT',
+      headers: {
+        'Authorization': `Bearer ${Token}`,
+        'Content-Type':'application/json'
+      },
+      body: JSON.stringify(data)
+    })
+      .then((response) => response.json())
+      .then((response) => {
+        if (response.error) {
+          console.log(response)
+          dispatch(FetchCurrentUserFailed(response.message));
+        } else {
+          console.log(response)
+          dispatch(FetchCurrentUserSuccess(response));
+        }
+      })
+  }
+}
   const UserName = useSelector(state => state);
   console.log(UserName)
   return (
     <div>
-      <label for="email">username: </label>
-      <input ></input>
-      <label for="email">email: </label>
-      <input ></input>
-      <button onClick={()=>{dispatch(fetchUserProfile())}} >modify</button>
+      <label for="email">username: {username}</label>
+      <input onChange={SaveUserName}/>
+    
+      <label for="description">description: {description}</label>
+      <input onChange={SaveUserDescription}/>
+      <button onClick={()=>{dispatch(UpdateUserProfile())}} >modify</button>
     </div>
   );
 }

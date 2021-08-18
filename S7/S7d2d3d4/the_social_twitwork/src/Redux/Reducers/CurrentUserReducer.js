@@ -1,4 +1,4 @@
-import { FETCH_CURRENT_USER_FAILED, FETCH_CURRENT_USER_SUCCESS, FETCH_CURRENT_USER_REQUEST, REGISTER_CURRENT_EMAIL,REGISTER_CURRENT_PASSWORD,REGISTER_CURRENT_USERNAME } from "../Types/CurrentUserTypes";
+import { FETCH_CURRENT_USER_FAILED, FETCH_CURRENT_USER_SUCCESS, FETCH_CURRENT_USER_REQUEST, REGISTER_CURRENT_EMAIL,REGISTER_CURRENT_PASSWORD,REGISTER_CURRENT_USERNAME,REGISTER_CURRENT_DESCRIPTION  } from "../Types/CurrentUserTypes";
 
 const initialStateCurrentUser = {
   username:"nobody",
@@ -10,7 +10,7 @@ const initialStateCurrentUser = {
 
 const CurrentUserReducer= (state = initialStateCurrentUser, action) => {
   console.log("Reducer Current USer launched")
-  console.log(action.user)
+  console.log(action)
   switch(action.type) {
     case  FETCH_CURRENT_USER_REQUEST:
       return {
@@ -42,7 +42,12 @@ const CurrentUserReducer= (state = initialStateCurrentUser, action) => {
         ...state,
         username: action.username
       }
-      
+    case  REGISTER_CURRENT_DESCRIPTION:
+    return{
+      ...state,
+      description: action.description
+    }
+
     default:
       return state;
   }
