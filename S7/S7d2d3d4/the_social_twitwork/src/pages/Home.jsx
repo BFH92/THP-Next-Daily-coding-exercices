@@ -1,0 +1,17 @@
+import React from 'react';
+import Presentation from '../components/Presentation';
+import NewText from '../components/NavBar/NewText';
+import MessagesList from '../components/MessagesList/MessagesList';
+const Home = () => {
+  return (
+    <div>
+      
+      <Presentation/>
+      <NewText/>
+      <MessagesList/>
+
+    </div>
+  );
+}
+
+export default Home;
