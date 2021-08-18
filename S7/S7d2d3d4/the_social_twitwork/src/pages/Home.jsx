@@ -1,6 +1,6 @@
 import React from 'react';
 import Presentation from '../components/Presentation';
-import NewText from '../components/NavBar/NewText';
+import NewText from '../components/NewText';
 import MessagesList from '../components/MessagesList/MessagesList';
 const Home = () => {
   return (

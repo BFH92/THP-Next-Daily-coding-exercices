@@ -1,7 +1,7 @@
 import React from 'react';
 import Cookies from 'js-cookie'
 import { useDispatch, useSelector } from 'react-redux';
-import {FetchCurrentUserFailed, FetchCurrentUserRequest, FetchCurrentUserSuccess, RegisterCurrentEmail,RegisterCurrentUserName,RegisterCurrentPassword } from '../Redux';
+import {FetchCurrentUserFailed, FetchCurrentUserRequest, FetchCurrentUserSuccess, RegisterCurrentEmail,RegisterCurrentUserName,RegisterCurrentPassword} from '../Redux';
 
 
   
@@ -16,7 +16,7 @@ const SignUpForm = () => {
       'password':password
     }
     const saveEmail=(e) => {
-      dispatch(RegisterCurrentEmail( e.target.value))
+      dispatch(RegisterCurrentEmail( e.target.value)) //TODO: voir comment le rendre + propre
     }
     const saveUserName=(e) => {
       dispatch(RegisterCurrentUserName( e.target.value))
@@ -26,7 +26,7 @@ const SignUpForm = () => {
     }
     const FetchSignUp =()=> {
       return (dispatch)=>{
-      dispatch(FetchCurrentUserRequest());
+      
       fetch('http://localhost:1337/auth/local/register', {
           method: 'POST',
           headers: {
@@ -41,8 +41,10 @@ const SignUpForm = () => {
             dispatch(FetchCurrentUserFailed(response.message));
           } else {
             console.log(response.status)
-            dispatch(FetchCurrentUserSuccess(response.user))
             Cookies.set('token',response.jwt)
+            dispatch(FetchCurrentUserSuccess(response.user))
+          
+            //dispatch(SaveCurrentToken(true))
           }
         })
       }

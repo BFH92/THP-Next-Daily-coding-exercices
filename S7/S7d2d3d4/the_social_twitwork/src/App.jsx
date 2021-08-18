@@ -5,20 +5,42 @@ import  Signup from './pages/Signup'
 import Profile from './pages/Profile';
 import NavBar from './components/NavBar';
 import User from './pages/User';
+
 import {
   BrowserRouter as Router,
-  Route, 
-  Switch, 
-} from 'react-router-dom'
+  Switch,
+  Route,
+  Redirect,
+  useParams,
+} from "react-router-dom"
 import { Provider } from 'react-redux';
 import store from './Redux/store';
-
-
+import { checkAuth } from './components/helpers';
+import { useSelector } from 'react-redux';
 
 const App = () => {
+  
+  
+  
+  const PrivateRoute = ({ component: Component, ...rest }) => {
+    const login = useSelector(state => state.currentuser.logged)
+    return(
+    <Route {...rest} render={props => (
+      login? (
+        <Component {...props} />
+      ) : (
+        <Redirect to={{ pathname: '/login' }} />
+      )
+    )} />
+  )};
+
+
+
   return (
     <div>
+      
     <Provider store={store}>
+
       <Router>
         <NavBar/>
         <main>
@@ -29,19 +51,18 @@ const App = () => {
             <Route path="/login">
               <Login />
             </Route>
-            <Route path="/signup">
+            <Route path="/register">
               <Signup />
             </Route>
-            <Route path="/profile">
-              <Profile/>
-            </Route>
-            <Route path="/user/:UserName">
-              <User/>
-            </Route>
+            <PrivateRoute path="/profile" component={Profile}/>
+            
+            <PrivateRoute path="/users/:UserName"component={User}/>
+            
           </Switch>
         </main>
       </Router>
       </Provider>
+    
     
     </div>
   );

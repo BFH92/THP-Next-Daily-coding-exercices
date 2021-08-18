@@ -10,8 +10,7 @@ const MessagesListReducer= (state = initialStateMessages, action) => {
   switch(action.type) {
     case  FETCH_POSTS_REQUEST:
       return {
-         state
-        
+      state
       };
     case  FETCH_POSTS_SUCCESS:
       return {

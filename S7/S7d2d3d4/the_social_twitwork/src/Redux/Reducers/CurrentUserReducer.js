@@ -1,15 +1,22 @@
-import { FETCH_CURRENT_USER_FAILED, FETCH_CURRENT_USER_SUCCESS, FETCH_CURRENT_USER_REQUEST, REGISTER_CURRENT_EMAIL,REGISTER_CURRENT_PASSWORD,REGISTER_CURRENT_USERNAME,REGISTER_CURRENT_DESCRIPTION  } from "../Types/CurrentUserTypes";
+import { FETCH_CURRENT_USER_FAILED, FETCH_CURRENT_USER_SUCCESS, FETCH_CURRENT_USER_REQUEST, REGISTER_CURRENT_EMAIL,REGISTER_CURRENT_PASSWORD,REGISTER_CURRENT_USERNAME,REGISTER_CURRENT_DESCRIPTION, SAVE_CURRENT_TOKEN,SAVE_CURRENT_LIKE,DELETE_CURRENT_LIKE } from "../Types/CurrentUserTypes";
+import Cookies from 'js-cookie'
+
+
+const token = Cookies.get('token')?true:false
 
 const initialStateCurrentUser = {
   username:"nobody",
   description:"",
   email:"",
   password:"",
-  error: ''
+  error: '',
+  logged: token,
+  id: '',
+  currentLike:""
 };
 
 const CurrentUserReducer= (state = initialStateCurrentUser, action) => {
-  console.log("Reducer Current USer launched")
+  console.log("Reducer Messages launched")
   console.log(action)
   switch(action.type) {
     case  FETCH_CURRENT_USER_REQUEST:
@@ -20,7 +27,9 @@ const CurrentUserReducer= (state = initialStateCurrentUser, action) => {
       return {
         ...state,
         username: action.user.username, 
-        description: action.user.description
+        description: action.user.description,
+        logged: token,
+        id: action.user.id
       }
     case  FETCH_CURRENT_USER_FAILED:
         return {
@@ -47,7 +56,22 @@ const CurrentUserReducer= (state = initialStateCurrentUser, action) => {
       ...state,
       description: action.description
     }
-
+    case  SAVE_CURRENT_TOKEN:
+    return{
+      ...state,
+      logged: action.token
+    }
+    case  SAVE_CURRENT_LIKE:
+    return{
+      ...state,
+      currentLike: action.currentLike
+    }
+    case  DELETE_CURRENT_LIKE:
+      return { 
+       ...state, 
+       currentLike: action.currentLike
+      }
+  
     default:
       return state;
   }

@@ -1,12 +1,15 @@
 import React from 'react';
 import Cookies from 'js-cookie'
 import { useSelector } from 'react-redux';
-import {FetchCurrentUserFailed, FetchCurrentUserRequest, FetchCurrentUserSuccess, RegisterCurrentEmail,RegisterCurrentUserName,RegisterCurrentPassword, RegisterCurrentDescription } from '../Redux';
+import {FetchCurrentUserFailed, FetchCurrentUserRequest, FetchCurrentUserSuccess,RegisterCurrentUserName, RegisterCurrentDescription } from '../Redux';
 import { useDispatch } from 'react-redux';
 import { useState } from 'react';
+import { useHistory } from 'react-router-dom';
+
 
 const UserEditable = () => {
   // if userName
+  const history = useHistory()
   const Token = Cookies.get('token')
   const dispatch = useDispatch();
   const email = useSelector(state => state.currentuser.email)
@@ -51,6 +54,7 @@ const UserEditable = () => {
         } else {
           console.log(response)
           dispatch(FetchCurrentUserSuccess(response));
+          history.push("/profile")
         }
       })
   }

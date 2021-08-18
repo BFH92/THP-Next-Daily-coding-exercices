@@ -1,13 +1,13 @@
 import React from 'react';
 import Cookies from 'js-cookie'
 import { useDispatch, useSelector } from 'react-redux';
-import {FetchCurrentUserFailed, FetchCurrentUserRequest, FetchCurrentUserSuccess, RegisterCurrentEmail,RegisterCurrentUserName,RegisterCurrentPassword } from '../Redux';
-
+import {FetchCurrentUserFailed, FetchCurrentUserRequest, FetchCurrentUserSuccess, RegisterCurrentEmail,RegisterCurrentUserName,RegisterCurrentPassword, SaveCurrentToken } from '../Redux';
+import { useHistory } from 'react-router-dom';
 const LoginForm = () => {
   const email = useSelector(state => state.currentuser.email)
   const username = useSelector(state => state.currentuser.username)
   const password = useSelector(state => state.currentuser.password)
-  
+  const history = useHistory()
   const dispatch = useDispatch();
   const data = {
     'identifier':email,
@@ -26,7 +26,6 @@ const LoginForm = () => {
   
   const FetchToLogin =()=> {
     return ()=>{
-    //dispatch(FetchCurrentUserRequest());
     fetch('http://localhost:1337/auth/local', {
         method: 'POST',
         headers: {
@@ -41,8 +40,12 @@ const LoginForm = () => {
           dispatch(FetchCurrentUserFailed(response.message));
         } else {
           console.log(response)
-          dispatch(FetchCurrentUserSuccess(response.user))
           Cookies.set('token',response.jwt)
+          dispatch(FetchCurrentUserSuccess(response.user))
+          Cookies.set('id',response.user.id)
+          history.push("/")
+          dispatch(SaveCurrentToken(response.user))
+    
         }
       })
     }
