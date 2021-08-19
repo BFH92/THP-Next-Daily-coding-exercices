@@ -1,0 +1,23 @@
+
+
+.bodyLink{
+  color:blue
+}
+.bodyLink:visited{
+  color:blue;
+  text-decoration: none;
+  }
+  .bodyLink:hover{
+    color:blue;
+  }
+  .bodyLink:focus{
+    color:blue;
+  }
+
+  .bodyLink:visited:hover{
+    color:blue;
+  }
+  .bodyLink:link 
+  { 
+   text-decoration:none; 
+  } 

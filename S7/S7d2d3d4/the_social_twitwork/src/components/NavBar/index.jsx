@@ -47,11 +47,37 @@ const NavBar = () => {
       <AppBar position="static">
         <Toolbar>
           <Typography variant="h6" className={classes.title}>
-          <Link to="/">Home</Link> 
+          <Link className="a" to="/">Home</Link> 
           </Typography>
-          <Link color="inherit" to="/profile">
+          {login? 
+          <>
+            <div>
+          <Link className="a" to="/profile">
+            Profile
+          </Link>
+          </div>
+          ----
+          <div>
+          <Link  onClick={logOut} className="a" >
+          Logout
+        </Link>
+        </div>
+        </>
+          :
+          <>
+          <div>
+          <Link className="a" to="/login">
             Login
           </Link>
+          </div>
+           / 
+          <div>
+          <Link className="a" to="/register">
+          Signup
+        </Link>
+        </div>
+        </>
+          }
         </Toolbar>
       </AppBar>
     </div>
