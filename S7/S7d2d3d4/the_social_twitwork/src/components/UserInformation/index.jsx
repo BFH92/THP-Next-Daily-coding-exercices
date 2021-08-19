@@ -3,12 +3,11 @@ import { useParams } from "react-router-dom";
 import Cookies from "js-cookie";
 import { useDispatch, useSelector } from "react-redux";
 import uuid from "uuid";
-import {SaveCurrentLike, DeleteCurrentLike} from "../Redux/Actions/CurrentUserActions";
-import { fetchPosts } from "./helpers/fetch";
+import {SaveCurrentLike, DeleteCurrentLike} from "../../Redux/Actions/CurrentUserActions";
+import { fetchPosts } from "../helpers/fetch";
 
 
 const UserInformation = () => {
-  //TODO: fetch avec userpArams pour récupérer les infos de l'user sélectionner
   const Token = Cookies.get("token");
   const [UserInfos, setUserInfos] = useState("");
   const [foundMessages, setFoundMessages] = useState("");
@@ -17,6 +16,8 @@ const UserInformation = () => {
   const messages = useSelector((state) => state.message.messages);
   const dispatch = useDispatch()
   const login = useSelector((state) => state.currentuser.logged);
+  
+  
   function fetchUsers(){
     const Token = Cookies.get("token");
     return () => {

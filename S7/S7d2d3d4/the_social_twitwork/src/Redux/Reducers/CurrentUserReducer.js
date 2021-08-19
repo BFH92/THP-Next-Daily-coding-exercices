@@ -12,7 +12,7 @@ const initialStateCurrentUser = {
   error: '',
   logged: token,
   id: '',
-  currentLike:""
+  currentLike: []
 };
 
 const CurrentUserReducer= (state = initialStateCurrentUser, action) => {
@@ -29,7 +29,9 @@ const CurrentUserReducer= (state = initialStateCurrentUser, action) => {
         username: action.user.username, 
         description: action.user.description,
         logged: token,
-        id: action.user.id
+        id: action.user.id,
+        email: action.user.email,
+        currentLike: ["A"]
       }
     case  FETCH_CURRENT_USER_FAILED:
         return {

@@ -1,5 +1,5 @@
 import React from 'react';
-import UserEditable from '../components/UserEditable';
+import UserEditable from '../components/Profile/Profile';
 import UserInformation from '../components/UserInformation';
 
 const User = () => {

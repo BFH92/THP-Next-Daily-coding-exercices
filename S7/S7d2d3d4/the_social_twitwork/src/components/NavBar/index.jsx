@@ -1,10 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import LikeButton from '../MessagesList/LikeButton';
 import { useSelector, useDispatch } from 'react-redux';
 import { SaveCurrentToken } from '../../Redux';
 import Cookies from 'js-cookie'
-
+import './index.css'
 const NavBar = () => {
   
 const login = useSelector(state => state.currentuser.logged)
@@ -15,7 +14,7 @@ const logOut =() =>{
   dispatch(SaveCurrentToken())
 }
   return (
-    <div>
+    <div className="navBar">
       <div>
         <Link to="/">Home</Link> 
       </div>  
@@ -23,11 +22,9 @@ const logOut =() =>{
         <Link to="/profile">Profile</Link>
       </div>
       <div>
-        {login?<button onClick={logOut}>Logout</button> : <Link to="/login">LOGIN</Link>} 
+        {login?<button onClick={logOut}>Logout</button> : <div><Link to="/login">LOGIN</Link> / <Link to="/register">SIGNUP</Link></div> } 
       </div>
-      <div>
-        {login?"" : <Link to="/register">SIGNUP</Link>} 
-      </div>
+      
     </div>
   );
 }

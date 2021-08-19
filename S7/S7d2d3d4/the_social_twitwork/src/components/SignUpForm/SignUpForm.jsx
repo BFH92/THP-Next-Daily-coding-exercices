@@ -1,8 +1,7 @@
 import React from 'react';
 import Cookies from 'js-cookie'
 import { useDispatch, useSelector } from 'react-redux';
-import {FetchCurrentUserFailed, FetchCurrentUserRequest, FetchCurrentUserSuccess, RegisterCurrentEmail,RegisterCurrentUserName,RegisterCurrentPassword} from '../Redux';
-
+import {FetchCurrentUserFailed, FetchCurrentUserRequest, FetchCurrentUserSuccess, RegisterCurrentEmail,RegisterCurrentUserName,RegisterCurrentPassword} from '../../Redux';
 
   
 const SignUpForm = () => {

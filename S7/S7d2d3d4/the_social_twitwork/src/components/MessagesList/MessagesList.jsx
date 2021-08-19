@@ -17,13 +17,18 @@ const MessagesList = () => {
   const UserId = useSelector((state) => state.currentuser.id);
   const messages = useSelector((state) => state.message.messages);
   const login = useSelector((state) => state.currentuser.logged);
-  const PostLikes = new Set(useSelector((state) => state.currentuser.currentLike));
+  const [getlikes, setGetLike] = useState(["B"])//useSelector((state) => state.currentuser.currentLike)
+  console.log("CHECK")
+  
+  let likes = new Set (getlikes)
+  console.log(likes)
 
+  
   const OnPostLike = (id, like) => {
   
     return () => {
       const data = {
-      like: PostLikes.has(id)? like-1:like+1
+      like: likes.has(id)? like-1:like+1
     };
       fetch(`http://localhost:1337/posts/${id}`, {
         method: "PUT",
@@ -40,12 +45,18 @@ const MessagesList = () => {
           } else {
             console.log(response);
             dispatch(fetchPosts());
-            if (PostLikes.has(id)){
-              PostLikes.delete(id)
-              dispatch(DeleteCurrentLike(PostLikes))
+            if (likes.has(id)){
+              likes.delete(id)
+              console.log("HEYEEYEYEY")
+              console.log (likes)
+              setGetLike(likes)
+          
             }else{
-              PostLikes.add(id)
-              dispatch(SaveCurrentLike(PostLikes))
+              likes.add(id)
+              console.log("ADDDDIn")
+              console.log(likes)
+              setGetLike(likes)
+      
             }
           }
         });

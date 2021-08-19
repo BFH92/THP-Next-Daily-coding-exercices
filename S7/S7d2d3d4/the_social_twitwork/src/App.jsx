@@ -5,17 +5,15 @@ import  Signup from './pages/Signup'
 import Profile from './pages/Profile';
 import NavBar from './components/NavBar';
 import User from './pages/User';
-
+import { PersistGate } from 'redux-persist/integration/react'
 import {
   BrowserRouter as Router,
   Switch,
   Route,
   Redirect,
-  useParams,
 } from "react-router-dom"
 import { Provider } from 'react-redux';
-import store from './Redux/store';
-import { checkAuth } from './components/helpers';
+import {store,persistor} from './Redux/store';
 import { useSelector } from 'react-redux';
 
 const App = () => {
@@ -37,10 +35,10 @@ const App = () => {
 
 
   return (
-    <div>
+    <div className="containerAll">
       
     <Provider store={store}>
-
+    <PersistGate loading={null} persistor={persistor}>
       <Router>
         <NavBar/>
         <main>
@@ -61,6 +59,7 @@ const App = () => {
           </Switch>
         </main>
       </Router>
+      </PersistGate>
       </Provider>
     
     
