@@ -1,5 +1,10 @@
 .containerAll{
   display: grid;
   height: 100vh;
-  grid-template-rows: 30px 1fr;
+  grid-template-rows: 80px 1fr;
+}
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
 }

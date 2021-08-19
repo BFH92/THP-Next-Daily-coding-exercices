@@ -50,7 +50,7 @@ export const OnDeletePost = (id) => {
       .then((response) => response.json())
       .then((response) => {
         if (response.error) {
-          console.log("error");
+          console.log(response);
         } else {
           console.log("success");
           dispatch(fetchPosts());
