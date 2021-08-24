@@ -21,7 +21,7 @@ const Works = () => {
         <main className="useCase">
           <Switch>  
             <Route path="/works" exact>
-              
+        
             </Route>
           
             <Route path="/works/:caseSlug">

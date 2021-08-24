@@ -22,7 +22,6 @@ const CaseStudy = () => {
   
       <div className="useCaseContent">
         <p>{currentCase? currentCase.title : "Oups il ya un couac"}</p>
-      
         <p>{currentCase? currentCase.text : "Oups il ya un couac"}</p>
       </div>
 

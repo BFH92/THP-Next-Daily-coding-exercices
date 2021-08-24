@@ -62,14 +62,14 @@ const MessagesList = () => {
   console.log(likes)
 
   
-  const OnPostLike = (id, like) => {
+  const OnPostLike = async(id, like) => {
   
     return () => {
       const data = {
       like: likes.has(id)? like-1:like+1,  
     };
       setGetLike(likes)
-      fetch(`http://localhost:1337/posts/${id}`, {
+      const response = await fetch(`http://localhost:1337/posts/${id}`, {
         method: "PUT",
         headers: {
           Authorization: `Bearer ${Token}`,
@@ -77,28 +77,30 @@ const MessagesList = () => {
         },
         body: JSON.stringify(data),
       })
-        .then((response) => response.json())
-        .then((response) => {
-          if (response.error) {
-            console.log(response);
-          } else {
-            console.log(response);
-            dispatch(fetchPosts());
-            if (likes.has(id)){
-              likes.delete(id)
-              console.log("HEYEEYEYEY")
-              console.log (likes)
-              setGetLike(likes)
-          
-            }else{
-              likes.add(id)
-              console.log("ADDDDIn")
-              console.log(likes)
-              setGetLike(likes)
+        const json = await response.json()
+        const displayLike = await likePost(json)
       
-            }
-          }
-        });
+      //function likePost (response) => {
+      //    if (response.error) {
+      //      console.log("ERROR LIKE");
+      //    } else {
+      //      console.log("SUCCESS LIKE");
+      //      dispatch(fetchPosts());
+      //      if (likes.has(id)){
+      //        likes.delete(id)
+      //        console.log("HEYEEYEYEY")
+      //        console.log (likes)
+      //        setGetLike(likes)
+      //    
+      //      }else{
+      //        likes.add(id)
+      //        console.log("ADDDDIn")
+      //        console.log(likes)
+      //        setGetLike(likes)
+    
+      //      }
+      //    }
+      };
     };
   };
   
@@ -119,11 +121,18 @@ const MessagesList = () => {
             </Typography>
           </CardContent>
           <IconButton aria-label="add to favorites" onClick={OnPostLike(message.id, message.like)}>
-          {login?  <Avatar aria-label="recipe" className={classes.avatar}>
+          {login?  
+        
+          <Avatar aria-label="recipe" className={classes.avatar}>
            <FavoriteIcon /> 
-           
-            </Avatar>:"" }
-          </IconButton>{message.like}
+            </Avatar> 
+            
+        
+           :"" }
+
+          </IconButton>
+          
+          {login? message.like:""}
           <IconButton aria-label="add to favorites" onClick={OnDeletePost(message.id)}>
           {login && message.user.id === UserId ?  <Avatar aria-label="recipe" className={classes.avatar}>
            <DeleteIcon />
