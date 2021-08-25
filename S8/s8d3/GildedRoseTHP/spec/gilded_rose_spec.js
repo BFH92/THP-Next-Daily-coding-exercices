@@ -56,8 +56,9 @@ describe("GildedRose shop manager", function () {
     ]
 
     expected.forEach(function (testCase, idx) {
-      expect(items[idx].quality).toBe(testCase.quality);
       expect(items[idx].sellIn).toBe(testCase.sellIn);
+      expect(items[idx].quality).toBe(testCase.quality);
+      
     });
   });
 
