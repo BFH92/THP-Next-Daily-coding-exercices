@@ -29,7 +29,7 @@ const updateQualityOf = (item) => {
   if (isMaxValueOf(quality) && isNotLegendary(item)) quality = 50;
   return (item.quality = quality);
 };
-const getConjuredDeprecation = (value) => value = value * 2;
+const getConjuredDeprecation = (value) => value * 2;
 const handleConcertParticularity= (item, quality) => {
   if (!isOutdated(item) && item.sellIn <= 5) quality += 2;
   else if (item.sellIn > 5 && item.sellIn <= 10) quality += 1;
