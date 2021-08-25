@@ -6,6 +6,7 @@ import {isOutdated,isMinValueOf,isMaxValueOf} from './generalItemsSpec';
 
 export const updateQualityOf = (item) => {
   let quality = item.quality;
+  
   if (isLegendary(item));
   else if (isOutdated(item)) {
     const value = 2;

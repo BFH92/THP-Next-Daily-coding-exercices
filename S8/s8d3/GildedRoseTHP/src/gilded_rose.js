@@ -1,3 +1,5 @@
+import { updateInfos } from "./items";
+
 class Shop {
   constructor(items = []) {
     this.items = items;
@@ -5,7 +7,7 @@ class Shop {
 
   updateQuality() {
     this.items.map((item) => {
-      item.updateInfos();
+      updateInfos(item);
     });
     return this.items;
   }

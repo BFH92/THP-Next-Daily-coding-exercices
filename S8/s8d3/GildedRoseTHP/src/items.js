@@ -1,20 +1,13 @@
 import {updateSellInOf} from './updateSellIn'
 import {updateQualityOf} from './updateQuality'
 
-class Item {
+export const Item = (name,sellIn,quality) =>({name: name, sellIn: sellIn, quality:quality}) 
   
-  constructor(name, sellIn, quality) {
-    this.name = name;
-    this.sellIn = sellIn;
-    this.quality = quality;
-  }
-  updateInfos() {
-    updateSellInOf(this);
-    updateQualityOf(this);
-    return this;
-  }
+export const updateInfos = (item) => {
+    updateSellInOf(item);
+    updateQualityOf(item);
+  return item
 }
 
-module.exports = {
-  Item
-};
+
+ 
