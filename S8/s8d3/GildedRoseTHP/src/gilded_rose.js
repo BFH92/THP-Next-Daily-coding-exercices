@@ -11,59 +11,73 @@ class Item {
   }
 }
 
+
 const updateSellInOf = (item) => {
-  return isLegendary(item)
-    ? (item.sellIn = item.sellIn)
-    : (item.sellIn = item.sellIn - 1);
+  return isLegendary(item) ? true : (item.sellIn -= 1);
 };
 
 const updateQualityOf = (item) => {
-  if (isLegendary(item)) item.quality = item.quality;
+  let quality = item.quality;
+  if (isLegendary(item));
   else if (isOutdated(item)) {
-    if (isSpecial(item)) item.quality = item.quality - 2;
-    else if (isConjured(item)) item.quality = item.quality - 4;
-    else item.quality = item.quality - 2;
-  }else {
-    if (isSpecial(item)) item.quality = item.quality + 1;
-    else if (isConjured(item)) item.quality = item.quality - 2;
-    else item.quality = item.quality - 1;
+    let value = 2
+    isConjured(item)? quality -= getConjuredDeprecation(value) : quality -= value
+  } else {
+    let value = 1
+    if (isSpecial(item)) quality += value;
+    else isConjured(item)? quality -= getConjuredDeprecation(value) : quality -= value;
   }
-
-  if (item.quality < 0) item.quality = 0;
-  if (item.quality > 50 && !isLegendary(item)) item.quality = 50;
-
-  if (isConcert(item) && item.sellIn > 0 && item.sellIn <= 5)
-    item.quality = item.quality + 2;
-  if (isConcert(item) && item.sellIn > 5 && item.sellIn <= 10)
-    item.quality = item.quality + 1;
-  if (isConcert(item) && item.sellIn <= 0) item.quality = 0;
-
-  return item.quality;
+  if (isConcert(item)) quality = handleConcertParticularity(item, quality)
+  if (isMinValueOf(quality)) quality = 0;
+  if (isMaxValueOf(quality) && isNotLegendary(item)) quality = 50;
+  return (item.quality = quality);
 };
 
+
+
+
+const getConjuredDeprecation = (value) => {
+  let result = value * 2
+  return result
+}
+const handleConcertParticularity= (item, quality) => {
+  if (!isOutdated(item) && item.sellIn <= 5) quality += 2;
+  else if (item.sellIn > 5 && item.sellIn <= 10) quality += 1;
+  else if (isOutdated(item)) quality = 0;
+  
+  return quality;
+}
+const isMinValueOf =(quality) =>{
+  return quality < 0;
+}
+const isMaxValueOf = (quality) => {
+  return quality > 50;
+};
 const isSpecial = (item) => {
-  return item.name === "Aged Brie" ||
-    item.name === "Backstage passes to a TAFKAL80ETC concert";
+  return (
+    item.name === "Aged Brie" ||
+    item.name === "Backstage passes to a TAFKAL80ETC concert"
+  );
 };
-
 const isLegendary = (item) => {
   return item.name === "Sulfuras, Hand of Ragnaros";
 };
-
+const isNotLegendary = (item) => {
+  return item.name !== "Sulfuras, Hand of Ragnaros";
+};
 const isConjured = (item) => {
   const conjuredItem = new RegExp("\\Conjured\\b");
   return item.name.match(conjuredItem);
 };
-
 const isConcert = (item) => {
   return item.name == "Backstage passes to a TAFKAL80ETC concert"
     ? true
     : false;
 };
-
 const isOutdated = (item) => {
-  return item.sellIn <= 0
+  return item.sellIn <= 0;
 };
+
 
 class Shop {
   constructor(items = []) {
