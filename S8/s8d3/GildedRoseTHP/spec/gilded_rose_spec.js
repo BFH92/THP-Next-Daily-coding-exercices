@@ -1,4 +1,6 @@
-var { Shop, Item } = require('../src/gilded_rose.js');
+import { Shop } from '../src/gilded_rose.js'
+import { Item } from '../src/items'
+
 describe("GildedRose shop manager", function () {
   let listItems;
 
